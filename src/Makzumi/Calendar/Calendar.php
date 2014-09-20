@@ -338,8 +338,11 @@ class Calendar {
 						$time_e = strtotime($key);
 						if ($time_e >= $time_1 && $time_e < $time_2) {
 							$hasEvent = TRUE;
+							if (isset($event['class'])) {
+								$ev_class = $event['class'];
+								unset($event['class']);
+							}
 							$evnts .= $this->buildEvents(FALSE, $event);
-							$ev_class = isset($event['class']) ? $event['class'] : '';
 						}
 					}
 
