@@ -196,14 +196,14 @@ class Calendar {
 			$cs = 1;
 
 		if ($this->nav) {
-			$h .= "<th>";
+			$h .= "<th colspan='7' class='text-center'>";
+			$h .= "<div class='pull-left'>";
 			$h .= "<a class='" . $this->prevClass . "' href='" . $this->prevLink() . "'>" . $this->prevIco . "</a>";
-			$h .= "</th>";
-			$h .= "<th colspan='$cs'>";
+			$h .= "</div>";
 			$h .= $month_name;
-			$h .= "</th>";
-			$h .= "<th>";
+			$h .= "<div class='pull-right'>";
 			$h .= "<a class='" . $this->nextClass . "' href='" . $this->nextLink() . "'>" . $this->nextIco . "</a>";
+			$h .= "</div>";
 			$h .= "</th>";
 		} else {
 			$h .= "<th colspan='7'>";
@@ -218,7 +218,7 @@ class Calendar {
 			$h .= "<tr class='" . $this->labelsClass . "'>";
 
 			for ($i = 0; $i <= 6; $i++) {
-				$h .= "<td>";
+				$h .= "<td width='150'>";
 				$h .= $this->day_lbls[$i];
 				$h .= "</td>";
 			}
@@ -272,6 +272,24 @@ class Calendar {
 		return $h;
 	}
 
+	public function dayClass($curr_date)
+	{
+		if ( ! is_array($this->events)) {
+			return null;
+		}
+
+		$class = null;
+
+		if (isset($this->events[$curr_date])) {
+			$class = (isset($this->events[$curr_date]['class']))
+				? $this->events[$curr_date]['class']
+				: $this->eventDayClass;
+			unset($this->events[$curr_date]['class']);
+		}
+
+		return $class;
+	}
+
 	private function buildBody() {
 		$day = 1;
 		$now_date = $this->year . '-' . $this->month . '-01';
@@ -284,12 +302,10 @@ class Calendar {
 				$curr_date = $this->getDayDate($day);
 				$is_today = "";
 				if ($curr_date == $this->today)
-					$is_today = "class='today'";
-				// if () {
-					//
-				// }
-				var_dump($day);
-				$h .= "<td data-datetime='$curr_date' class='$is_today $event_date'>";
+					$is_today = "today";
+				// dump($curr_date);
+				$event_day_class = $this->dayClass($curr_date);
+				$h .= "<td data-datetime='$curr_date' class='$event_day_class $is_today'>";
 				$h .= $this->dateWrap[0];
 				if ($day <= $monthLength && ($i > 0 || $j >= $startingDay)) {
 					$h .= $this->dayWrap[0];
