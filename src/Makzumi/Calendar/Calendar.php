@@ -285,7 +285,11 @@ class Calendar {
 				$is_today = "";
 				if ($curr_date == $this->today)
 					$is_today = "class='today'";
-				$h .= "<td data-datetime='$curr_date' $is_today>";
+				// if () {
+					//
+				// }
+				var_dump($day);
+				$h .= "<td data-datetime='$curr_date' class='$is_today $event_date'>";
 				$h .= $this->dateWrap[0];
 				if ($day <= $monthLength && ($i > 0 || $j >= $startingDay)) {
 					$h .= $this->dayWrap[0];
