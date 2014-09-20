@@ -1,5 +1,6 @@
-<?php
-namespace Makzumi\Calendar;
+<?php namespace Makzumi\Calendar;
+
+use \HTML;
 
 class Calendar {
 	//SORRY FOR LACK OF DOCUMENTATION, I'LL GET TO IT SOON
@@ -36,6 +37,7 @@ class Calendar {
 	private $labelsClass = 'cal_labels';
 	private $eventWrap = array('<p>', '</p>');
 	private $eventDayClass = 'event-date';
+	private $tableAttributes = null;
 
 	private $today;
 
@@ -183,10 +185,16 @@ class Calendar {
 		return $this;
 	}
 
+	public function setAttributes(array $attributes)
+	{
+		$this->tableAttributes = HTML::attributes($attributes);
+		return $this;
+	}
+
 	private function buildHeader() {
 		$month_name = $this->month_lbls[$this->month - 1] . ' ' . $this->year;
 		$vclass = strtolower($this->view);
-		$h = "<table class='" . $this->tableClass . " " . $vclass . "'>";
+		$h = '<table class="'.$this->tableClass.' '.$vclass.'" '.$this->tableAttributes.'>';
 		$h .= "<thead>";
 		$h .= "<tr class='" . $this->headClass . "'>";
 		$cs = 5;
@@ -529,5 +537,4 @@ class Calendar {
 				$vars .= '&' . $key . '=' . $value;
 		return $vars;
 	}
-
 }
