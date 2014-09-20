@@ -305,15 +305,17 @@ class Calendar {
 					$is_today = "today";
 				// dump($curr_date);
 				$event_day_class = $this->dayClass($curr_date);
-				$h .= "<td data-datetime='$curr_date' class='$event_day_class $is_today'>";
-				$h .= $this->dateWrap[0];
 				if ($day <= $monthLength && ($i > 0 || $j >= $startingDay)) {
+					$h .= "<td data-datetime='$curr_date' class='$event_day_class $is_today'>";
+					$h .= $this->dateWrap[0];
 					$h .= $this->dayWrap[0];
 					$h .= $day;
 					$h .= $this->dayWrap[1];
 					$h .= $this->buildEvents($curr_date);
 					$day++;
 				} else {
+					$h .= "<td>";
+					$h .= $this->dateWrap[0];
 					$h .= "&nbsp;";
 				}
 				$h .= $this->dateWrap[1];
