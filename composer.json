@@ -1,5 +1,5 @@
 {
-	"name": "makzumi/calendar",
+	"name": "dmitrymomot/laravel-calendar",
 	"type": "library",
 	"description": "Laravel 4 Flexible Calendar",
 	"keywords": ["laravel","calendar", "events"],
