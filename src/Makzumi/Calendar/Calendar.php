@@ -35,6 +35,7 @@ class Calendar {
 	private $dateWrap = array('<div class="date">', '</div>');
 	private $labelsClass = 'cal_labels';
 	private $eventWrap = array('<p>', '</p>');
+	private $eventDayClass = 'event-date';
 
 	private $today;
 
@@ -134,6 +135,11 @@ class Calendar {
 
 	public function setDayWrap($wrap) {
 		$this->dayWrap = $wrap;
+		return $this;
+	}
+
+	public function setEventDayClass($wrap) {
+		$this->eventDayClass = $wrap;
 		return $this;
 	}
 
@@ -323,18 +329,24 @@ class Calendar {
 					$time_1 = strtotime($time_r . $min);
 					$time_2 = strtotime(date('Y-m-d H:i:s', $time_1) . '+30 minute');
 					$dt = date('Y-m-d H:i:s', $time_1);
-					$h .= "<td colspan='3' data-datetime='$dt'>";
-					$h .= $this->dateWrap[0];
 
 					$hasEvent = FALSE;
+					$evnts = '';
+					$ev_class = '';
 					foreach ($events as $key=>$event) {
 						//EVENT TIME AND DATE
 						$time_e = strtotime($key);
 						if ($time_e >= $time_1 && $time_e < $time_2) {
 							$hasEvent = TRUE;
-							$h .= $this->buildEvents(FALSE, $event);
+							$evnts .= $this->buildEvents(FALSE, $event);
+							$ev_class = isset($event['class']) ? $event['class'] : '';
 						}
 					}
+
+					$ev_day = ($hasEvent) ? $this->eventDayClass : '';
+					$h .= '<td colspan="3" data-datetime="'.$dt.'" class="'.$ev_day.' '.$ev_class.'">';
+					$h .= $this->dateWrap[0];
+					$h .= $evnts;
 					$h .= !$hasEvent ? '&nbsp;' : '';
 					$h .= $this->dateWrap[1];
 					$h .= "</td>";
