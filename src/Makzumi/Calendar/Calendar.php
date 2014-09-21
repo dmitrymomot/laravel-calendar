@@ -5,7 +5,7 @@ use \HTML;
 
 class Calendar {
 	//SORRY FOR LACK OF DOCUMENTATION, I'LL GET TO IT SOON
-	private $day_lbls = array('Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat');
+	private $day_lbls = array('Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun');
 	private $month_lbls = array('January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December');
 	private $days_month = array(31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31);
 	private $week_days = array();
@@ -306,8 +306,8 @@ class Calendar {
 
 		$monthLength = $this->days_month[$this->month - 1];
 		$h = "<tr>";
-		for ($i = $startingDay == 7 ? 1 : 0; $i < 9; $i++) {
-			for ($j = 0; $j <= 6; $j++) {
+		for ($i = 0; $i < 9; $i++) {
+			for ($j = 1; $j <= 7; $j++) {
 				$curr_date = $this->getDayDate($day);
 				$is_today = "";
 				if ($curr_date == $this->today)
