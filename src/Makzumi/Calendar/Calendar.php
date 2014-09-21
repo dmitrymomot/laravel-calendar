@@ -1,5 +1,6 @@
 <?php namespace Makzumi\Calendar;
 
+use \Debugbar;
 use \HTML;
 
 class Calendar {
@@ -312,8 +313,8 @@ class Calendar {
 				if ($curr_date == $this->today)
 					$is_today = "today";
 				// dump($curr_date);
-				$event_day_class = $this->dayClass($curr_date);
 				if ($day <= $monthLength && ($i > 0 || $j >= $startingDay)) {
+					$event_day_class = $this->dayClass($curr_date);
 					$h .= "<td data-datetime='$curr_date' class='$event_day_class $is_today'>";
 					$h .= $this->dateWrap[0];
 					$h .= $this->dayWrap[0];
